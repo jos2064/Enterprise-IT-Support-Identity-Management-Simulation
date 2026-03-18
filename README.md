@@ -19,8 +19,8 @@ Designed and deployed a simulated enterprise Helpdesk environment integrating At
 - Audit: Mirrored the termination in Jira by suspending the user's SaaS access.
 
 # Phase 3: Role-Based Access Control (RBAC) & File Security
-- NTFS vs. Share Permissions: Configured a secure departmental network share (\\Server\Marketing).
-- Security Groups: Created an AD Security Group (SG_Marketing_Read) and applied the Principle of Least Privilege.
+- NTFS vs. Share Permissions: Configured a secure share.
+- Security Groups: Created an AD Security Group (Marketing) and applied the Principle of Least Privilege.
 - Execution: Granted "Full Control" at the Share level, but restricted NTFS Security permissions to "Read & Execute" strictly for the Security Group. Resolved user access tickets by managing group memberships rather than individual user permissions.
 
 # Phase 4: PowerShell Automation (Bulk Onboarding)
