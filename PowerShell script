@@ -1,0 +1,32 @@
+# 1. Import the Active Directory module so PowerShell understands AD commands
+Import-Module ActiveDirectory
+
+# 2. Tell PowerShell where your HR spreadsheet is located
+$Users = Import-Csv -Path "C:\new_hires.csv"
+
+# 3. Set a temporary default password securely for all new hires
+$SecurePassword = ConvertTo-SecureString "Welcome@2026!" -AsPlainText -Force
+
+# 4. Loop through each row in the CSV and create the user
+foreach ($User in $Users) {
+    
+    # Define the user's full name
+    $FullName = "$($User.FirstName) $($User.LastName)"
+    
+    Write-Host "Creating account for: $FullName" -ForegroundColor Green
+
+    # The actual AD creation command
+    New-ADUser -Name $FullName `
+               -GivenName $User.FirstName `
+               -Surname $User.LastName `
+               -SamAccountName $User.SamAccountName `
+               -UserPrincipalName "$($User.SamAccountName)@yourdomain.local" `
+               -Department $User.Department `
+               -Title $User.Title `
+               -AccountPassword $SecurePassword `
+               -Enabled $true `
+               -ChangePasswordAtLogon $true `
+               -Path "CN=Users,DC=yourdomain,DC=local"
+}
+
+Write-Host "Bulk Provisioning Complete!" -ForegroundColor Cyan
