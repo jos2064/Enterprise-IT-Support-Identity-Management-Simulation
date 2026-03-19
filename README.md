@@ -1,6 +1,6 @@
 # Enterprise-IT-Support-Identity-Management-Simulation
 # Objective:
-Designed and deployed a simulated enterprise Helpdesk environment integrating Atlassian Jira Service Management (ITSM) with a local Windows Server Active Directory (AD) infrastructure. The project focuses on resolving simulated end-user tickets, managing Identity and Access Management (IAM), enforcing Role-Based Access Control (RBAC), and automating bulk user provisioning via PowerShell.
+Designed and deployed a simulated enterprise Helpdesk environment using Atlassian Jira Service Management (ITSM) and manually executed the tasks in my local Windows Server Active Directory (AD) infrastructure. The project focuses on resolving end-user tickets, managing Identity and Access Management (IAM), enforcing Role-Based Access Control (RBAC), and automating bulk user provisioning via PowerShell.
 # Tools & Technologies Used:
 - Ticketing & ITSM: Jira Service Management (Cloud)
 - Infrastructure: Windows Server (Core), Active Directory Domain Services (AD DS)
@@ -28,3 +28,7 @@ Designed and deployed a simulated enterprise Helpdesk environment integrating At
 - The Solution: Authored and executed a PowerShell script utilizing the New-ADUser cmdlet to parse the data file and sequentially generate user objects.
 
 The Result: Automatically populated user attributes (Name, SamAccountName, Title, Department), placed them in the correct OU, and assigned a standardized, secure temporary password with forced reset upon first login.
+
+# Learnings from errors
+- While automating onboarding of new interns through PowerShell, I encountered an error due to a username already existing in the Active Directory. This highligted importance of enforcing unique identity attributes during user provisioning.
+- So the solution is to use conditional(if-else) statements to check for existing usernames in AD and dynamically modify the usernames(appending numerical value) to ensure uniqueness.
